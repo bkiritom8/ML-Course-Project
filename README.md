@@ -133,10 +133,10 @@ seaborn>=0.11.0
 - Class weighting skipped as data is now balanced
 
 ## Contact
-[Your name/email]
+Moumita Baidya/ baidya.m@northeastern.edu
 
 ## Last Updated
-[Date]
+11/13/2025
 ```
 
 ---
