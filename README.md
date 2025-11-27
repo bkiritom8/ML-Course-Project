@@ -131,7 +131,7 @@ Moumita Baidya/ baidya.m@northeastern.edu
 PREPROCESSED ALZHEIMER'S DATASET
 =================================
 
-FILE: X_FINAL_preprocessed.csv
+FILE: Final_Balanced_Dataset_SMOTE.csv.csv
 -------------------------------
 Shape: 1557 rows × 1,003 columns
 
