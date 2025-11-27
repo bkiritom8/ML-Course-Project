@@ -14,15 +14,17 @@ Explainable Machine Learning for Alzheimer's Disease Stage Classification using 
 - **GSE110226**: 20 patients (brain tissue, Affymetrix platform)
 - **GSE63060**: 329 patients (blood samples, Illumina platform)
 - **GSE85426**: Excluded (insufficient probe mapping)
+- **ADNI**:     744 patients
 
 ### Final Dataset
-- **Patients:** 394 (197 Alzheimer's, 197 Control)
-- **Features:** 1,002
+- **Patients:** 1042 (152 AD, 371 Control, 519 MCI)
+- **Features:** 1,003
   - 1,000 gene expression features
   - 1 clinical feature (Age)
   - 1 demographic feature (Sex)
-- **Target:** Binary classification (1 = Alzheimer's, 0 = Control)
-- **Class Balance:** Perfectly balanced (50-50 split)
+- **Target:** Multi-class classification (AD, Control, MCI)
+- **Class Balance:** Applied SMOTE.
+     Final shape (1557, 1003)
 
 ## Preprocessing Pipeline
 
@@ -41,30 +43,15 @@ Explainable Machine Learning for Alzheimer's Disease Stage Classification using 
 - **APOE:** Excluded (94% missing data)
 
 ### 4. Class Imbalance Handling
-- **SMOTE applied** (349 → 394 patients)
-- Achieved perfect balance (197 per class)
+- **SMOTE applied** (1042 → 1557 patients)
 
 ## Files
 
 ### Data Files
-- **`X_FINAL_preprocessed.csv`** - Preprocessed feature matrix (394 × 1,002)
-- **`y_FINAL.csv`** - Target labels (394 × 1)
+- **`Final_Balanced_Dataset_SMOTE.csv`** - Preprocessed  Dataset with shape (1557, 1003)
 
 ### Code
-- **`Data_Preprocessing.ipynb`** - Complete preprocessing pipeline with documentation
-
-## Usage
-```python
-import pandas as pd
-
-# Load preprocessed data
-X = pd.read_csv('X_FINAL_preprocessed.csv')
-y = pd.read_csv('y_FINAL.csv')['Has_Alzheimers']
-
-print(f"Features shape: {X.shape}")
-print(f"Target shape: {y.shape}")
-print(f"Class distribution:\n{y.value_counts()}")
-```
+- **`Final_Data_Preprocessing.ipynb`** - Complete preprocessing pipeline with documentation
 
 ## Feature Description
 
@@ -81,16 +68,17 @@ print(f"Class distribution:\n{y.value_counts()}")
 - Features normalized and ready for ML
 
 ## Next Steps (For Model Building Team)
-1. Load `X_FINAL_preprocessed.csv` and `y_FINAL.csv`
-2. Perform train-test split (recommended: 80-20)
-3. Apply 5-fold cross-validation × 10 repeats on training set
-4. Train models:
+1. Load `Final_Data_Preprocessing`
+2. Split the dataset into train & test set.
+3. Perform train-test split (recommended: 80-20)
+4. Apply 5-fold cross-validation × 10 repeats on training set
+5. Train models:
    - Logistic Regression (L2 regularization)
    - SVM (RBF kernel)
    - Random Forest
    - XGBoost
    - Hybrid CNN-DNN with Self-Attention
-5. Evaluate on test set
+6. Evaluate on test set
 
 ## Requirements
 ```
@@ -134,9 +122,6 @@ seaborn>=0.11.0
 
 ## Contact
 Moumita Baidya/ baidya.m@northeastern.edu
-
-## Last Updated
-11/13/2025
 ```
 
 ---
@@ -148,11 +133,12 @@ PREPROCESSED ALZHEIMER'S DATASET
 
 FILE: X_FINAL_preprocessed.csv
 -------------------------------
-Shape: 394 rows × 1,002 columns
+Shape: 1557 rows × 1,003 columns
 
 Rows: Individual patients
-- 197 Alzheimer's Disease patients
-- 197 Control patients (no Alzheimer's)
+- 519 Alzheimer's Disease patients
+- 519 Control patients (no Alzheimer's)
+- 519 MCI Patients
 
 Columns: Features (1,002 total)
 - Columns 0-999: Gene expression values
@@ -171,21 +157,13 @@ Columns: Features (1,002 total)
   - Binary encoding: 1 = Male, 0 = Female
   - Range: {0, 1}
 
-FILE: y_FINAL.csv
------------------
-Shape: 394 rows × 1 column
-
-Column: Has_Alzheimers
-- 1 = Alzheimer's Disease (197 patients)
-- 0 = Control / No Alzheimer's (197 patients)
-
 PREPROCESSING SUMMARY
 ---------------------
 ✓ Data sources merged and harmonized (GSE110226 + GSE63060)
 ✓ Gene expression: Log2 transformed + Quantile normalized
-✓ Feature selection: 16,196 → 1,000 genes
+✓ Feature selection: 14907 → 1,000 genes
 ✓ Clinical features: Standardized and encoded
-✓ Class balance: SMOTE applied (349 → 394 patients)
+✓ Class balance: SMOTE applied
 ✓ Quality: No missing values, no duplicates
 
 DATA IS READY FOR MACHINE LEARNING
@@ -219,15 +197,3 @@ jupyter>=1.0.0
 ```
 
 ---
-
-## **Simple Repository Structure**
-```
-alzheimers-preprocessing/
-│
-├── README.md
-├── data_description.txt
-├── requirements.txt
-│
-├── X_FINAL_preprocessed.csv
-├── y_FINAL.csv
-└── Data_Preprocessing.ipynb
