@@ -173,13 +173,6 @@ DATA IS READY FOR MACHINE LEARNING
 - Scaling: Already applied (quantile norm + z-score)
 - No additional preprocessing needed
 
-RECOMMENDED USAGE
------------------
-1. Load X and y
-2. Split into train/test (80-20 or 70-30)
-3. Apply cross-validation on training set
-4. Train models
-5. Evaluate on held-out test set
 ```
 
 ---
