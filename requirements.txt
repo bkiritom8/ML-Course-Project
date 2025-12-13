@@ -1,3 +1,33 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:bbc24e82bb11b2135cb8392a802ae23cef20c8b8ddca27e2e00ee9990538315f
-size 272
+# Core Data Processing
+pandas>=1.3.0
+numpy>=1.21.0
+
+# Machine Learning
+scikit-learn>=1.0.0
+xgboost>=1.5.0
+imbalanced-learn>=0.8.0
+
+# Explainability
+shap>=0.41.0
+
+# Batch Correction
+combat>=0.1.0
+
+# Hyperparameter Optimization
+scikit-optimize>=0.9.0
+
+# Visualization
+matplotlib>=3.4.0
+seaborn>=0.11.0
+
+# Data I/O
+openpyxl>=3.7.0
+xlrd>=2.0.0
+
+# System & Utilities
+jupyter>=1.0.0
+ipython>=7.30.0
+
+# For GPU acceleration
+torch>=1.10.0
+tensorflow>=2.8.0
