@@ -1,0 +1,8 @@
+Metric,Value
+Test Accuracy,0.6860
+Macro F1-Score,0.6854
+Cohen's Kappa,0.5115
+Correct Predictions,166/242
+Confidence (Correct),0.8219
+Known Genes Found,0/5
+Top Feature,OAZ1
